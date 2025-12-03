@@ -1,4 +1,4 @@
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon, ImageIcon } from "lucide-react";
 import { useBrandKitStore } from "../../../store/useBrandKitStore";
 
 interface StepThreeProps {
@@ -17,6 +17,11 @@ export default function StepThree({ onNext, onBack }: StepThreeProps) {
     tone,
     style
   } = useBrandKitStore();
+
+  const handleGenerateBackgrounds = () => {
+    // TODO: Implement background generation logic
+    console.log("Generating backgrounds...");
+  };
 
   return (
     <div className="flex flex-col h-full max-h-[80vh] text-white custom-scrollbar">
@@ -50,6 +55,15 @@ export default function StepThree({ onNext, onBack }: StepThreeProps) {
               <option value="story">Story (1080×1920)</option>
               <option value="landscape">Landscape (1200×628)</option>
             </select>
+            
+            {/* Generate Backgrounds Button */}
+            <button
+              onClick={handleGenerateBackgrounds}
+              className="mt-2 w-full px-4 py-2 rounded-lg bg-gradient-to-r from-violet-500 to-purple-600 text-white font-medium hover:from-violet-600 hover:to-purple-700 active:scale-95 transition flex items-center justify-center gap-2"
+            >
+              <ImageIcon size={16} />
+              Generate Backgrounds
+            </button>
           </div>
 
           {/* Tone */}
