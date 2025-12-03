@@ -1,48 +1,43 @@
 package handlers
 
 import (
-	"context"
+	"canvas-backend/util"
 	"encoding/json"
 	"net/http"
-
-	"canvas-backend/util"
 )
 
-type BackgroundRequest struct {
-	ProductDescription string   `json:"productDescription"`
-	BrandDescription   string   `json:"brandDescription"`
-	Colors             []string `json:"colors"`
-}
+func (a *APIState) GenerateBackgrounds(w http.ResponseWriter, r *http.Request) {
+	var req struct {
+		Product string   `json:"product"`
+		Brand   string   `json:"brand"`
+		Colors  []string `json:"colors"`
+	}
 
-type BackgroundResponse struct {
-	GeneratedURLs []string `json:"generatedURLs"`
-}
-
-func GenerateBackgroundHandler(w http.ResponseWriter, r *http.Request) {
-	ctx := context.Background()
-
-	var req BackgroundRequest
 	json.NewDecoder(r.Body).Decode(&req)
 
-	// 1. Create the prompt
-	bgPrompt := util.GenerateBackgroundPrompt(
-		req.ProductDescription,
-		req.BrandDescription,
+	// 1. Build prompt
+	prompt := util.GenerateBackgroundPrompt(
+		req.Product,
+		req.Brand,
 		req.Colors,
 	)
 
-	// 2. Generate background images (DALL·E)
-	imgBytesList := util.GenerateBackgroundImages(bgPrompt)
+	// 2. Generate AI Backgrounds
+	imgBytesList, err := util.GenerateBackgroundImages(prompt)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
 
 	// 3. Upload to Cloudinary
 	var urls []string
-	for _, imgBytes := range imgBytesList {
-		u := util.UploadToCloudinary(imgBytes)
+	for _, img := range imgBytesList {
+		u := util.UploadToCloudinary(img)
 		urls = append(urls, u)
 	}
 
 	// 4. Return URLs
-	json.NewEncoder(w).Encode(BackgroundResponse{
-		GeneratedURLs: urls,
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"background_urls": urls,
 	})
 }
