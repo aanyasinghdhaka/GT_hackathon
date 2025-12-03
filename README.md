@@ -125,7 +125,8 @@ Produces **multiple background variations**, each uploaded to Cloudinary.
 
 These URLs are appended to the image list used by the layout model.
 
-DISCLAIMER//NOTE :Our system also supports generating a single, fully-AI-generated advertisement when needed. We already have all required inputs — the product image , brand logo , their LLM-generated descriptions from urls, brand colors, tagline, and creative direction - which are combined into a structured prompt for a full creative ad. This produces a complete image ad via DALL·E 3 or Gemini Image.
+###*DISCLAIMER//NOTE* : 
+Our system also supports generating a single, fully-AI-generated advertisement when needed. We already have all required inputs — the product image , brand logo , their LLM-generated descriptions from urls, brand colors, tagline, and creative direction - which are combined into a structured prompt for a full creative ad. This produces a complete image ad via DALL·E 3 or Gemini Image.
 However, because full AI image generation can distort logos, alter product appearance, or place incorrect text, we additionally provide a safe mode: AI generates only the background while Fabric.js controls the final layout. This allows users to manually adjust text, CTA, logo placement, and product before the final download, ensuring brand-critical elements remain accurate. Together, this dual-workflow satisfies hackathon requirements (full AI ad generation possible) while still delivering a robust, editable, production-ready creative pipeline.
 
 
