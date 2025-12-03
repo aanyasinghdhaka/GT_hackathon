@@ -203,7 +203,6 @@ Frontend supports:
 * Gemini Flash 2.0 / Gemini Pro 1.5
 * DALL·E 3 (optional)
 * Cloudinary SDK
-* Fiber (HTTP)
 * PostgreSQL
 * Goose migrations
 * Docker
@@ -213,10 +212,8 @@ Frontend supports:
 * React + Vite
 * TypeScript
 * TailwindCSS
-* ShadCN UI
 * Zustand
 * Fabric.js
-* Axios
 
 ---
 
